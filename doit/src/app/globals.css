@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.custom-placeholder::placeholder {
+  @apply text-slate-200;
+}
+body {
+  background-color: #f9fafb;
+}
