@@ -14,10 +14,16 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       height: {
-        sixty: "60px", // 높이 60 커스텀
+        15: "60px", // 높이 60 커스텀
+      },
+      width: {
+        42: "168px",
       },
       padding: {
         90: "90px",
+      },
+      boxShadow: {
+        black: "2px 4px 0px 0px black",
       },
       screens: {
         phone: "360px",
