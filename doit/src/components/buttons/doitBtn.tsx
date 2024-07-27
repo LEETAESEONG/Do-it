@@ -42,7 +42,7 @@ export default function DoitBtn(params: BtnType) {
             onClick={params.onClick}
             className="box-border ml-4 w-14 h-14 flex items-center justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-slate-200 shadow-black"
           >
-            <PlusIcon className="w-6 h-6" color="black" />
+            <PlusIcon className="size-6" color="black" />
           </button>
         );
       }
@@ -51,7 +51,7 @@ export default function DoitBtn(params: BtnType) {
           onClick={params.onClick}
           className="box-border ml-4 flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-slate-200 font-black shadow-black"
         >
-          <PlusIcon className="w-6 h-6" color="black" />
+          <PlusIcon className="size-6" color="black" />
           <p className="text-base">추가하기</p>
         </button>
       );
@@ -62,7 +62,7 @@ export default function DoitBtn(params: BtnType) {
             onClick={params.onClick}
             className="box-border ml-4 w-14 h-14 flex items-center justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-violet-600 shadow-black"
           >
-            <PlusIcon className="w-6 h-6" color="white" />
+            <PlusIcon className="size-6" color="white" />
           </button>
         );
       }
@@ -71,7 +71,7 @@ export default function DoitBtn(params: BtnType) {
           onClick={params.onClick}
           className="box-border ml-4 flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-violet-600 font-black shadow-black"
         >
-          <PlusIcon className="w-6 h-6" color="white" />
+          <PlusIcon className="size-6" color="white" />
           <p className="text-white text-base">추가하기</p>
         </button>
       );

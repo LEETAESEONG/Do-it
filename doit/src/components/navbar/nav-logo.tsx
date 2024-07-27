@@ -13,17 +13,17 @@ export default function NavLogo() {
   };
   //
   return (
-    <div className="content-center cursor-pointer">
+    <div className="content-center">
       <Image
         src={smallLogo}
         alt="small_logo"
-        className="block tablet:hidden desktop:hidden"
+        className="block tablet:hidden desktop:hidden cursor-pointer"
         onClick={handleClick}
       />
       <Image
         src={largeLogo}
         alt="large_logo"
-        className="hidden tablet:block desktop:block"
+        className="hidden tablet:block desktop:block cursor-pointer"
         onClick={handleClick}
       />
     </div>
