@@ -15,7 +15,9 @@ const config: Config = {
       },
       height: {
         fifty: "50px",
-        15: "60px", // 높이 60 커스텀
+        15: "60px",
+        125: "500px",
+        134: "536px",
       },
       width: {
         42: "168px",
@@ -30,6 +32,9 @@ const config: Config = {
         phone: "360px",
         tablet: "640px",
         desktop: "1280px",
+      },
+      colors: {
+        nothing: "#94A3B8",
       },
     },
   },
