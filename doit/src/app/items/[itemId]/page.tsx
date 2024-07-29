@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import getDetail from "@/utils/get-detail";
 import { type Detail } from "@/utils/get-detail";
+import CheckListDetail from "../../../components/check-lists/check-list-detail";
 
 export default function ItemDetail({
   params,
@@ -11,7 +12,14 @@ export default function ItemDetail({
     itemId: string;
   };
 }) {
-  const [currentDetail, setCurrentDetail] = useState<Detail>();
+  const [currentDetail, setCurrentDetail] = useState<Detail>({
+    id: -1,
+    tenantId: "ga1754",
+    name: "",
+    memo: "",
+    imageUrl: "",
+    isCompleted: false,
+  });
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -20,5 +28,9 @@ export default function ItemDetail({
     };
     fetchDetail();
   }, [params.itemId]);
-  return <h1>{params.itemId}</h1>;
+  return (
+    <div className="w-full grid desktop:grid-cols-12 desktop:gap-6 desktop:grid-rows-none tablet:grid-rows-4 tablet:gap-5 phone:grid-rows-4 phone:gap-4">
+      <CheckListDetail name={currentDetail.name} />
+    </div>
+  );
 }
