@@ -24,6 +24,7 @@ export default function NavLogo() {
         alt="large_logo"
         className="hidden tablet:block desktop:block cursor-pointer"
         onClick={handleClick}
+        priority
       />
       <Image
         src={smallLogo}

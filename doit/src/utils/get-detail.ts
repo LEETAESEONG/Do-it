@@ -1,9 +1,9 @@
 export type Detail = {
-  id: number;
+  id: string;
   tenantId: string;
   name: string;
-  memo: string;
-  imageUrl: string;
+  memo: string | null;
+  imageUrl: string | null;
   isCompleted: boolean;
 };
 
