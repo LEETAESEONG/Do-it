@@ -36,7 +36,7 @@ export default function CheckListImage({ src, setImageUrl }: Props) {
             src={src}
             alt="Uploaded Image"
             fill={true}
-            className="object-contain"
+            className="rounded-3xl"
           />
           <div
             className="absolute bottom-4 right-4 rounded-full border-2 border-slate-900 border-solid size-16 bg-rose-500 flex justify-center items-center cursor-pointer hover:opacity-70"
