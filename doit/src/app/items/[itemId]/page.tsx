@@ -5,6 +5,7 @@ import getDetail from "@/utils/get-detail";
 import { type Detail } from "@/utils/get-detail";
 import CheckListDetail from "../../../components/check-lists/check-list-detail";
 import CheckListImage from "@/components/check-lists/check-list-image";
+import CheckListMemo from "@/components/check-lists/check-list-memo";
 
 export default function ItemDetail({
   params,
@@ -33,9 +34,16 @@ export default function ItemDetail({
     fetchDetail();
   }, [params.itemId]);
   return (
-    <div className="w-full grid desktop:grid-cols-12 desktop:gap-6 desktop:grid-rows-none">
-      <CheckListDetail name={name} />
-      <CheckListImage src={imageUrl} setImageUrl={setImageUrl} />
-    </div>
+    <>
+      <div className="w-full grid desktop:grid-cols-12 desktop:gap-6 desktop:grid-rows-none">
+        <CheckListDetail
+          name={name}
+          setIsCompleted={setIsCompleted}
+          isCompleted={isCompleted}
+        />
+        <CheckListImage src={imageUrl} setImageUrl={setImageUrl} />
+        <CheckListMemo />
+      </div>
+    </>
   );
 }

@@ -36,6 +36,7 @@ const config: Config = {
       },
       colors: {
         nothing: "#94A3B8",
+        memo: "#92400E",
       },
     },
   },
