@@ -37,6 +37,11 @@
   - put, delete api 연결
 - 8/2 버튼 추가 완료
   - api 연결 및 테스트 필요
+- 8/3 api 생성
+  - delete item
+  - post item => 기존에 페이지에 같이 존재했던 함수를 분리함
+  - post image
+  - patch item
 
 </details>
 

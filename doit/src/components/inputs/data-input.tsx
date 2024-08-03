@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DoitBtn from "../buttons/doitBtn";
+import postItem from "@/utils/post-item";
 
 export default function DataInput() {
   const [content, setContent] = useState("");
@@ -9,27 +10,13 @@ export default function DataInput() {
     if (!content) return alert("no content");
 
     const tenantId = "ga1754"; // replace with your actual tenantId
-    const apiUrl = `https://assignment-todolist-api.vercel.app/api/${tenantId}/items`;
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: content }),
-      });
-
-      if (response.ok) {
-        // 요청이 성공했을 때 처리
-        console.log("Item added successfully");
-      } else {
-        // 요청이 실패했을 때 처리
-        console.error("Failed to add item");
-      }
+      const newItem = await postItem(tenantId, { name: content });
+      console.log("Item added successfully:", newItem);
       setContent("");
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error adding item:", error);
     }
   };
 

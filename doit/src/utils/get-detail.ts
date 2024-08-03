@@ -8,14 +8,21 @@ export type Detail = {
 };
 
 const getDetail = async (tenantId: string, itemId: string): Promise<Detail> => {
-  const response = await fetch(
-    `https://assignment-todolist-api.vercel.app/api/${tenantId}/items/${itemId}`
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch items");
+  try {
+    const response = await fetch(
+      `https://assignment-todolist-api.vercel.app/api/${tenantId}/items/${itemId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch item details");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching item details:", error);
+    throw error;
   }
-  const data = await response.json();
-  return data;
 };
 
 export default getDetail;

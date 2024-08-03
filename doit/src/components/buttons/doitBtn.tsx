@@ -79,21 +79,30 @@ export default function DoitBtn(params: BtnType) {
   } else if (params.condition == "update") {
     if (params.isActive) {
       return (
-        <button className="box-border flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-lime-300 font-black shadow-black">
+        <button
+          onClick={params.onClick}
+          className="box-border flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-lime-300 font-black shadow-black"
+        >
           <CheckIcon className="size-6" color="black" />
           수정완료
         </button>
       );
     }
     return (
-      <button className="box-border flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-slate-200 font-black shadow-black">
+      <button
+        onClick={params.onClick}
+        className="box-border flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-slate-200 font-black shadow-black"
+      >
         <CheckIcon className="size-6" color="black" />
         수정완료
       </button>
     );
   }
   return (
-    <button className="box-border ml-4 tablet:ml-4 phone:ml-0 flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-rose-500 text-white font-black shadow-black">
+    <button
+      onClick={params.onClick}
+      className="box-border ml-4 tablet:ml-4 phone:ml-0 flex items-center w-42 h-14 justify-center rounded-3xl border-solid border-slate-900 border-2 hover:opacity-70 bg-rose-500 text-white font-black shadow-black"
+    >
       <XMarkIcon className="size-6" color="white" />
       삭제하기
     </button>
