@@ -15,6 +15,7 @@ export default function NothingTodo() {
           className="block tablet:hidden desktop:hidden"
           src={nothingTodoSmall}
           alt="nothingTodoSmall"
+          priority
         />
         <div className="grid mt-4 justify-items-center">
           <p className="m-0 text-nothing">아직 다 한 일이 없어요</p>

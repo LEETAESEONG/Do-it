@@ -42,6 +42,7 @@
   - post item => 기존에 페이지에 같이 존재했던 함수를 분리함
   - post image
   - patch item
+- 8/4 디테일 페이지 memo 입력 개발
 
 </details>
 

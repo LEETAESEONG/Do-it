@@ -7,6 +7,9 @@ import CheckListDetail from "../../../components/check-lists/check-list-detail";
 import CheckListImage from "@/components/check-lists/check-list-image";
 import CheckListMemo from "@/components/check-lists/check-list-memo";
 import DoitBtn from "@/components/buttons/doitBtn";
+import deleteItem from "@/utils/delete-item";
+import patchItem from "@/utils/patch-item";
+import { useRouter } from "next/navigation";
 
 export default function ItemDetail({
   params,
@@ -15,10 +18,11 @@ export default function ItemDetail({
     itemId: string;
   };
 }) {
+  const router = useRouter();
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [tenantId, setTenantId] = useState("ga1754");
-  const [memo, setMemo] = useState<string | null>(null);
+  const [memo, setMemo] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [isCompleted, setIsCompleted] = useState(false);
 
@@ -28,12 +32,40 @@ export default function ItemDetail({
       setId(tmpDetail.id);
       setName(tmpDetail.name);
       setTenantId(tmpDetail.tenantId);
-      setMemo(tmpDetail.memo);
+      if (tmpDetail.memo) {
+        setMemo(tmpDetail.memo);
+      }
       setImageUrl(tmpDetail.imageUrl);
       setIsCompleted(tmpDetail.isCompleted);
     };
     fetchDetail();
   }, [params.itemId]);
+
+  const handleDelete = async () => {
+    try {
+      await deleteItem(tenantId, parseInt(id));
+      router.push("/"); // 삭제 후 홈 페이지로 이동
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
+  const handleUpdate = async () => {
+    const data = {
+      name,
+      memo,
+      imageUrl: imageUrl || "",
+      isCompleted,
+    };
+
+    try {
+      const updatedItem = await patchItem(tenantId, parseInt(id), data);
+      console.log("Item updated successfully:", updatedItem);
+    } catch (error) {
+      console.error("Error updating item:", error);
+    }
+  };
+
   return (
     <>
       <div className="w-full grid desktop:grid-cols-12 desktop:gap-6 desktop:grid-rows-none">
@@ -43,12 +75,16 @@ export default function ItemDetail({
           isCompleted={isCompleted}
         />
         <CheckListImage src={imageUrl} setImageUrl={setImageUrl} />
-        <CheckListMemo />
+        <CheckListMemo memo={memo} setMemo={setMemo} />
       </div>
       <div className="w-full desktop:grid desktop:grid-cols-12 desktop:gap-6 desktop:grid-rows-none tablet:justify-center phone:flex phone:justify-center">
         <div className="flex desktop:justify-end desktop:col-end-12 col-span-5 tablet:justify-end tablet:w-full phone:w-full phone:justify-between">
-          <DoitBtn condition="update" isActive={isCompleted} />
-          <DoitBtn condition="delete" />
+          <DoitBtn
+            condition="update"
+            isActive={isCompleted}
+            onClick={handleUpdate}
+          />
+          <DoitBtn condition="delete" onClick={handleDelete} />
         </div>
       </div>
     </>

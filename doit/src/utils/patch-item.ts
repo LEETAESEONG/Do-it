@@ -1,16 +1,16 @@
 import { Detail } from "@/utils/get-detail";
 
-type UpdateItemPayload = {
+type PatchItemPayload = {
   name: string;
   memo: string;
   imageUrl: string;
   isCompleted: boolean;
 };
 
-async function updateItem(
+async function patchItem(
   tenantId: string,
   itemId: number,
-  data: UpdateItemPayload
+  data: PatchItemPayload
 ): Promise<Detail> {
   try {
     const response = await fetch(
@@ -36,4 +36,4 @@ async function updateItem(
   }
 }
 
-export default updateItem;
+export default patchItem;

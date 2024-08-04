@@ -1,7 +1,8 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import smallImg from "./assets/img.png";
 import { PlusIcon, XMarkIcon } from "@heroicons/react/16/solid";
+import postImage from "@/utils/post-image"; // 경로를 실제 위치로 수정하세요
 
 type Props = {
   src: string | null;
@@ -10,22 +11,36 @@ type Props = {
 
 export default function CheckListImage({ src, setImageUrl }: Props) {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isUploading, setIsUploading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (e) => {
-      const eTargetResult = e.target?.result;
-      if (typeof eTargetResult === "string") {
-        setImageUrl(eTargetResult);
-      }
-    };
+
+    setIsUploading(true);
+
+    try {
+      const uploadResult = await postImage("ga1754", file);
+      setImageUrl(uploadResult.url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      // URL을 빈 문자열로 설정
+      setImageUrl(null);
+      // 이미지 삭제 로직 추가 (필요한 경우 서버에도 삭제 요청)
+    } catch (error) {
+      console.error("Error removing image:", error);
+    }
   };
 
   return (
@@ -36,26 +51,31 @@ export default function CheckListImage({ src, setImageUrl }: Props) {
             src={src}
             alt="Uploaded Image"
             fill={true}
+            sizes="width: 100%"
             className="rounded-3xl"
           />
           <div
             className="absolute bottom-4 right-4 rounded-full border-2 border-slate-900 border-solid size-16 bg-rose-500 flex justify-center items-center cursor-pointer hover:opacity-70"
-            onClick={() => {
-              setImageUrl(null);
-            }}
+            onClick={handleDeleteClick}
           >
             <XMarkIcon className="size-10 fill-white" />
           </div>
         </>
       ) : (
         <>
-          <Image src={smallImg} alt="Placeholder Image" />
-          <div
-            className="absolute bottom-4 right-4 rounded-full size-16 bg-slate-200 flex justify-center items-center cursor-pointer hover:opacity-70"
-            onClick={handleClick}
-          >
-            <PlusIcon className="size-10 fill-slate-500" />
-          </div>
+          {isUploading ? (
+            <div>Uploading...</div>
+          ) : (
+            <>
+              <Image src={smallImg} alt="Placeholder Image" />
+              <div
+                className="absolute bottom-4 right-4 rounded-full size-16 bg-slate-200 flex justify-center items-center cursor-pointer hover:opacity-70"
+                onClick={handleClick}
+              >
+                <PlusIcon className="size-10 fill-slate-500" />
+              </div>
+            </>
+          )}
         </>
       )}
       <input
