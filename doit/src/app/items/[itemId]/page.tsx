@@ -44,7 +44,7 @@ export default function ItemDetail({
   const handleDelete = async () => {
     try {
       await deleteItem(tenantId, parseInt(id));
-      router.push("/"); // 삭제 후 홈 페이지로 이동
+      router.replace("/"); // 삭제 후 홈 페이지로 이동
     } catch (error) {
       console.error("Error deleting item:", error);
     }
@@ -61,6 +61,7 @@ export default function ItemDetail({
     try {
       const updatedItem = await patchItem(tenantId, parseInt(id), data);
       console.log("Item updated successfully:", updatedItem);
+      router.replace("/");
     } catch (error) {
       console.error("Error updating item:", error);
     }

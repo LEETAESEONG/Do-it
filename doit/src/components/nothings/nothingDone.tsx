@@ -10,6 +10,7 @@ export default function NothingDone() {
           className="hidden tablet:block desktop:block"
           src={nothingDoneLarge}
           alt="nothingDoneLarge"
+          priority
         />
         <Image
           className="block tablet:hidden desktop:hidden"
